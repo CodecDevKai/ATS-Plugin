@@ -1,0 +1,23 @@
+# 1 heart = 2hp
+
+# enables or disables the plugin, you can also use /toggle
+plugin-enabled: true
+
+# the default amount of hp a player has
+base-health: 10
+
+# the added amount of hp a player gets when near other players
+added-health: 2
+
+# enables or disables a maximum amount of health
+toggle-max-health: false
+
+# the maximum amount of hp a player can have
+max-health: 69
+
+# the player detection range in X, Y, Z
+range:
+  x: 16
+  y: 16
+  z: 16
+
