@@ -50,6 +50,7 @@ PERMISSIONS?!?!?
 yes permissions indeed.
 I've tried to keep it relatively simple, with for now just a single permission.
 - ats.reload
+
 All it does is grant the abillity to reload the configs. It really is that simple.
 
 Questions or suggestions are always welcome. (discord: kai.prod)
