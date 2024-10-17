@@ -10,7 +10,7 @@ public class ApesTogetherStrong extends JavaPlugin{
 
     @Override
     public void onDisable() {
-        System.out.println("ape gone");
+        System.out.println("Hope to see you again!");
     }
 
     @Override
@@ -18,6 +18,6 @@ public class ApesTogetherStrong extends JavaPlugin{
         saveDefaultConfig();
         getCommand("ats").setExecutor(new CommandManager(this));
         getServer().getPluginManager().registerEvents(new EventListener(this), this);
-        System.out.println("apes togethere stong");
+        System.out.println("Apes Together Strong has successfully loaded!");
     }
 }

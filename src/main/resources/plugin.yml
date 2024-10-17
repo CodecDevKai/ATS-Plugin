@@ -1,9 +1,9 @@
 name: ApesTogetherStrong
-version: 1.0.0
+version: 1.0.1
 main: dev.k41j0.ApesTogetherStrong
 description: Working together has never been easier (or more vital!).
 author: K41J0
-api-version: '1.21'
+api-version: '1.13'
 commands:
   ats:
     description: Execute ApesTogetherStrong commands
