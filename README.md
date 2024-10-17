@@ -15,22 +15,27 @@ You said CUSTOMIZABLE??
 Sure did! With the incredibly simple config.yml you can change this plugin to your liking in well under a minute!
 
 - plugin-enabled: true
+
 ^ enables or disables the plugin without any seperate plugin managers
 
 - base-health: 10
+
 ^ sets a base max health
 
 - added-health: 2
+
 ^ sets how much health is added per nearby player
 
 - toggle-max-health: false
 - max-health: 69
+
 ^ allows you to enable and set a maximum amount of health
 
 - range:
   x: 16
   y: 16
   z: 16
+  
 ^ sets how far the radius stretches across each axis
 
 COMMANDS!!!!
