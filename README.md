@@ -38,6 +38,10 @@ Sure did! With the incredibly simple config.yml you can change this plugin to yo
   
 ^ sets how far the radius stretches across each axis
 
+- debugging-enabled: false
+  
+^ enables or disables debugging (console spam)
+
 COMMANDS!!!!
 -----------------------------------------------------------------------------------------------
 Just one single command, that is:
