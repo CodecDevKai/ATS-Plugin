@@ -19,7 +19,6 @@ public class CommandManager implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-
         SubCommand cmd = null;
 
         if(args.length > 0) {

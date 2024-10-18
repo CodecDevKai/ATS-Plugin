@@ -1,11 +1,12 @@
 package dev.k41j0;
 
-import org.bukkit.attribute.Attribute;
-import org.bukkit.configuration.ConfigurationSection;
+import dev.k41j0.systems.ConfigSystem;
+import dev.k41j0.systems.HealthSystem;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 public class EventListener implements Listener {
     private final ApesTogetherStrong plugin;
@@ -15,35 +16,48 @@ public class EventListener implements Listener {
     }
 
     @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent event) {
+        Player player = event.getPlayer();
+        plugin.getHealthSystem().resetHealth(player);
+
+        plugin.getDebugSystem().sendDebugMessage(player.getName() + " has quit, resetting health.");
+    }
+
+    @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
+        ConfigSystem configSystem = plugin.getConfigSystem();
+        HealthSystem healthSystem = plugin.getHealthSystem();
 
-        boolean pluginEnabled = plugin.getConfig().getBoolean("plugin-enabled");
-        int baseHealth = plugin.getConfig().getInt("base-health");
-        int addedHealth = plugin.getConfig().getInt("added-health");
-        boolean toggleMaxHealth = plugin.getConfig().getBoolean("toggle-max-health");
-        int maxHealth = plugin.getConfig().getInt("max-health");
-
-        ConfigurationSection range = plugin.getConfig().getConfigurationSection("range");
-        int x = range.getInt("x");
-        int y = range.getInt("y");
-        int z = range.getInt("z");
-
-
-        if(pluginEnabled) {
-            int playerCount = player.getNearbyEntities(x, y, z).stream().filter(e -> e instanceof Player).mapToInt(e -> 1).reduce(0, (a, b) -> a + b);
-
-            if(playerCount <= 0) {
-                player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(baseHealth);
-            } else {
-                if(toggleMaxHealth) {
-                    player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(Math.min(baseHealth + playerCount * addedHealth, maxHealth));
-                }
-                player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(baseHealth + playerCount * addedHealth);
-            }
-        } else {
-            player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(baseHealth);
+        if (!configSystem.isPluginEnabled()) {
+            healthSystem.resetHealth(player);
+            return;
         }
 
+        int playerCount = (int) player.getNearbyEntities(configSystem.getX(), configSystem.getY(), configSystem.getZ())
+                .stream()
+                .filter(e -> e instanceof Player)
+                .count();
+
+        plugin.getDebugSystem().sendDebugMessage(player.getName() + " moved; nearby players: " + playerCount);
+
+        if (playerCount <= 0) {
+            healthSystem.setMaxHealth(player, configSystem.getBaseHealth());
+        } else {
+            double newHealth = calculateNewHealth(player, configSystem, playerCount);
+            healthSystem.setMaxHealth(player, newHealth);
+        }
+    }
+
+    private double calculateNewHealth(Player player, ConfigSystem configSystem, int playerCount) {
+        double baseHealth = configSystem.getBaseHealth();
+        double addedHealth = configSystem.getAddedHealth();
+        double newHealth = baseHealth + playerCount * addedHealth;
+
+        if (configSystem.isToggleMaxHealth()) {
+            return Math.min(newHealth, configSystem.getMaxHealth());
+        } else {
+            return newHealth;
+        }
     }
 }

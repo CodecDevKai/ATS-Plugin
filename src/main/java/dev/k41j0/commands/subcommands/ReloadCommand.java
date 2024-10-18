@@ -16,7 +16,6 @@ public class ReloadCommand extends SubCommand {
     public boolean playerOnly() {
         return false;
     }
-
     @Override
     public String permissionsRequired() {
         return "ats.reload";
@@ -40,12 +39,14 @@ public class ReloadCommand extends SubCommand {
     @Override
     public void perform(Player player, String[] args) {
         if(player == null) {
-            this.plugin.reloadConfig();
+            plugin.reloadConfig();
+            plugin.getConfigSystem().load();
             System.out.println("Reloaded config!");
             return;
         }
 
-        this.plugin.reloadConfig();
+        plugin.reloadConfig();
+        plugin.getConfigSystem().load();
         player.sendMessage("Reloaded config!");
 
     }
