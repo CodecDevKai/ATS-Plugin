@@ -19,9 +19,9 @@ public class ConfigSystem {
     private double maxHealth = 40.0D;
 
     private ConfigurationSection range;
-    private int x = 16;
-    private int y = 16;
-    private int z = 16;
+    private int rangeX = 16;
+    private int rangeY = 16;
+    private int rangeZ = 16;
 
     public void load() {
         pluginEnabled = plugin.getConfig().getBoolean("plugin-enabled", true);
@@ -33,9 +33,9 @@ public class ConfigSystem {
 
         range = plugin.getConfig().getConfigurationSection("range");
 
-        x = range != null ? range.getInt("x", 16) : 16;
-        y = range != null ? range.getInt("y", 16) : 16;
-        z = range != null ? range.getInt("z", 16) : 16;
+        rangeX = range != null ? range.getInt("x", 16) : 16;
+        rangeY = range != null ? range.getInt("y", 16) : 16;
+        rangeZ = range != null ? range.getInt("z", 16) : 16;
     }
 
     public boolean isPluginEnabled() {
@@ -62,16 +62,16 @@ public class ConfigSystem {
         return maxHealth;
     }
 
-    public int getX() {
-        return x;
+    public int getRangeX() {
+        return rangeX;
     }
 
-    public int getY() {
-        return y;
+    public int getRangeY() {
+        return rangeY;
     }
 
-    public int getZ() {
-        return z;
+    public int getRangeZ() {
+        return rangeZ;
     }
 
 
