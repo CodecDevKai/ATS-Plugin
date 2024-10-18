@@ -34,7 +34,7 @@ public class EventListener implements Listener {
             return;
         }
 
-        int playerCount = (int) player.getNearbyEntities(configSystem.getRangeX(), configSystem.getRangeY(), configSystem.getRangeX())
+        int playerCount = (int) player.getNearbyEntities(configSystem.getRangeX(), configSystem.getRangeY(), configSystem.getRangeZ())
                 .stream()
                 .filter(e -> e instanceof Player)
                 .count();
