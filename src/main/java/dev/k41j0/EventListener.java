@@ -1,5 +1,6 @@
 package dev.k41j0;
 
+import org.bukkit.attribute.Attribute;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -33,15 +34,15 @@ public class EventListener implements Listener {
             int playerCount = player.getNearbyEntities(x, y, z).stream().filter(e -> e instanceof Player).mapToInt(e -> 1).reduce(0, (a, b) -> a + b);
 
             if(playerCount <= 0) {
-                player.setMaxHealth(baseHealth);
+                player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(baseHealth);
             } else {
                 if(toggleMaxHealth) {
-                    player.setMaxHealth(Math.min(baseHealth + playerCount * addedHealth, maxHealth));
+                    player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(Math.min(baseHealth + playerCount * addedHealth, maxHealth));
                 }
-                player.setMaxHealth(baseHealth + playerCount * addedHealth);
+                player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(baseHealth + playerCount * addedHealth);
             }
         } else {
-            player.setMaxHealth(baseHealth);
+            player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(baseHealth);
         }
 
     }

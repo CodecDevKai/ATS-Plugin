@@ -19,24 +19,53 @@ public class CommandManager implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if(sender instanceof Player) {
-            Player p = (Player) sender;
 
-            if(args.length > 0){
-                for(int i = 0; i < subCommands.size(); i++){
-                    if(args[0].equalsIgnoreCase(subCommands.get(i).getName())){
-                        getSubCommands().get(i).perform(p, args);
-                    }
+        SubCommand cmd = null;
+
+        if(args.length > 0) {
+            for(SubCommand subCmd : subCommands) {
+                if(args[0].equalsIgnoreCase(subCmd.getName())) {
+                    cmd = subCmd;
+                    break;
                 }
-            } else if(args.length == 0){
-                p.sendMessage("----------------------------------------");
-                for(int i = 0; i < subCommands.size(); i++){
-                    p.sendMessage(subCommands.get(i).getSyntax() + " - " + subCommands.get(i).getDescription());
-                }
-                p.sendMessage("----------------------------------------");
             }
         }
+
+        if (cmd != null) {
+            executeCommand(sender, cmd, args);
+        } else {
+            showCommandList(sender);
+        }
         return true;
+    }
+
+    private void executeCommand(CommandSender sender, SubCommand command, String[] args) {
+        if (command.playerOnly() && !(sender instanceof Player)) {
+            System.out.println("This command has to be executed by a player!");
+            return;
+        }
+
+        Player player = (sender instanceof Player) ? (Player) sender : null;
+        if (player == null || player.hasPermission(command.permissionsRequired())) {
+            command.perform(player, args);
+        }
+    }
+
+    private void showCommandList(CommandSender sender) {
+        if (sender instanceof Player) {
+            Player p = (Player) sender;
+            p.sendMessage("----------------------------------------");
+            for (SubCommand subCmd : subCommands) {
+                p.sendMessage(subCmd.getSyntax() + " - " + subCmd.getDescription());
+            }
+            p.sendMessage("----------------------------------------");
+        } else {
+            System.out.println("----------------------------------------");
+            for (SubCommand subCmd : subCommands) {
+                System.out.println(subCmd.getSyntax() + " - " + subCmd.getDescription());
+            }
+            System.out.println("----------------------------------------");
+        }
     }
 
     public ArrayList<SubCommand> getSubCommands() {

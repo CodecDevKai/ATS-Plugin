@@ -13,6 +13,16 @@ public class ReloadCommand extends SubCommand {
     }
 
     @Override
+    public boolean playerOnly() {
+        return false;
+    }
+
+    @Override
+    public String permissionsRequired() {
+        return "ats.reload";
+    }
+
+    @Override
     public String getName() {
         return "reload";
     }
@@ -29,12 +39,14 @@ public class ReloadCommand extends SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-        if(player.hasPermission("ats.reload")) {
+        if(player == null) {
             this.plugin.reloadConfig();
-            player.sendMessage("Reloaded config!");
-        } else {
-            player.sendMessage(plugin.getCommand("ats").getPermissionMessage());
+            System.out.println("Reloaded config!");
+            return;
         }
+
+        this.plugin.reloadConfig();
+        player.sendMessage("Reloaded config!");
 
     }
 }
