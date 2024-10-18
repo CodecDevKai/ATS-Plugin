@@ -1,4 +1,4 @@
-[Apes Together Strong](https://www.spigotmc.org/resources/apes-together-strong-working-together-but-better.120248/)
+[Apes Together Strong (Spigot)](https://www.spigotmc.org/resources/apes-together-strong-working-together-but-better.120248/)
 ===============================================================================================
 You ever start up a new server for you and your friends, and end up quitting after a few days because the nearest living, breathing person is Bob at 21k blocks west?
 Say no more.
