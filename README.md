@@ -1,3 +1,5 @@
+[Apes Together Strong (Spigot)](https://www.spigotmc.org/resources/apes-together-strong-working-together-but-better.120248/)
+===============================================================================================
 You ever start up a new server for you and your friends, and end up quitting after a few days because the nearest living, breathing person is Bob at 21k blocks west?
 Say no more.
 -----------------------------------------------------------------------------------------------
@@ -37,6 +39,10 @@ Sure did! With the incredibly simple config.yml you can change this plugin to yo
   z: 16
   
 ^ sets how far the radius stretches across each axis
+
+- debugging-enabled: false
+  
+^ enables or disables debugging (console spam)
 
 COMMANDS!!!!
 -----------------------------------------------------------------------------------------------
