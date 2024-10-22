@@ -4,7 +4,6 @@ import dev.k41j0.commands.CommandManager;
 import dev.k41j0.systems.ConfigSystem;
 import dev.k41j0.systems.HealthSystem;
 import dev.k41j0.systems.DebugSystem;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 

@@ -13,6 +13,9 @@ public class HealthSystem {
 
     public void setMaxHealth(Player player, double maxHealth) {
         if(player == null) return;
+        if(player.getHealth() > maxHealth) {
+            player.setHealth(maxHealth);
+        }
         player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(maxHealth);
         plugin.getDebugSystem().sendDebugMessage("Successfully set max health for player " + player.getName() + " to " + String.valueOf(maxHealth));
     }
